@@ -17,13 +17,15 @@
 		String id = (String) session.getAttribute("id");
 		String date = null;
 		
-		if(title.equals("")) {
-			out.println("<script>alert('제목이 입력되지 않았습니다.');</script>");
-			response.sendRedirect("modify.jsp");
-		}
-		if(content.equals("")) {
-			out.println("<script>alert('내용이 입력되지 않았습니다.');</script>");
-			response.sendRedirect("modify.jsp");
+		if(title.equals("") || content.equals("")) { //제목이 입력되지 않았을 때
+			%>
+				<script>
+				alert("제목 또는 내용을 입력해주세요.");
+				location.href='modify.jsp';
+				</script>
+			<%
+			
+			return;
 		}
 		
 		String driver = "com.mysql.jdbc.Driver";
@@ -62,7 +64,9 @@
 			out.println("DB오류<br>");
 		}
 	%>
-	수정이 완료되었습니다.<br>
-	<a href="main.jsp">일기장으로 이동</a>
+	<script>
+		alert("수정이 완료되었습니다.");
+		location.href="main.jsp";
+	</script>
 </body>
 </html>

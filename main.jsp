@@ -79,8 +79,9 @@
 		
 	%>
 	</table>
-
-	<a href="write.html">일기 쓰기</a>
-	<a href="logout.jsp">로그아웃</a><br><br>
+	<br>
+	<input type="button" onclick="location.href='write.html'" value="일기 쓰기"/>
+	<input type="button" onclick="location.href='logout.jsp'" value="로그아웃"/>
+	
 </body>
 </html>

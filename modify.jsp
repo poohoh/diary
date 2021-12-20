@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	#box {
+	.box {
 		background-color:#f5d682;
 		border: 1px solid black;
 		vertical-align:top;
@@ -68,10 +68,10 @@
 							<td>최근 작성 날짜 : <%= date %></td>
 							</tr>
 							<tr>
-								<td>제목 : </td><td><input type="text" name="title" value="<%=title %>" id="box"></td>
+								<td>제목 : </td><td><input type="text" id="ipt_title" name="title" value="<%=title %>" class="box" /></td>
 							</tr>
 							<tr>
-								<td>내용 : </td><td><input type="text" name="content" value="<%=content %>" id="box" style="height:200px;width:300px;"></td>
+								<td>내용 : </td><td><textarea name="content" id="ipt_content" class="box" style="height:200px;width:300px;"><%=content %></textarea></td>
 							</tr>
 						</table>
 						<%
@@ -83,7 +83,14 @@
 	%>
 	<input type="submit" value="저장"/>
 	<input type="button" onclick="location.href='diary.jsp?num=<%=num %>'" value="취소"/>
-	<input type="reset" value="초기화"/>
+	<input type="button" id="btn_initialize" value="초기화" />
 	</form>
+	
+	<script>
+	btn_initialize.addEventListener("click", function() {
+		ipt_title.value = "";
+		ipt_content.value = "";
+	});
+	</script>
 </body>
 </html>

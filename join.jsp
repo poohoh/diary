@@ -22,8 +22,13 @@
 		PreparedStatement pstmt = null;
 		
 		if(id=="" || pw=="" || name=="") { //입력하지 않은 항목이 있을 때
-			out.println("다시 입력해주세요.");
-			response.sendRedirect("join.html");
+			%>
+			<script>
+			alert("내용이 입력되지 않았습니다.");
+			location.href='join.html';
+			</script>
+			<%
+			return;
 		} else{	//제대로 입력되었을 때
 			try{
 				//드라이버 로드
@@ -46,11 +51,19 @@
 		    }
 			
 			if(result == -1){	//이미 회원인 경우
-				out.println("이미 회원입니다.<br>");
-	       		out.println("<a href='login.html'>로그인으로 이동</a>");
+				%>
+					<script>
+					alert("중복된 ID입니다.");
+					location.href="join.html";
+					</script>
+				<%
 			} else {	//회원이 아니었을 경우
-				out.println("가입 처리 되었습니다.");
-				out.println("<a href='login.html'>로그인으로 이동</a>");
+				%>
+					<script>
+					alert("가입이 완료되었습니다.");
+					location.href="login.html";
+					</script>
+				<%
 			}
 			pstmt.close();
 			conn.close();

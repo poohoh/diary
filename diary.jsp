@@ -24,6 +24,7 @@
 		String title = null;
 		String date = null;
 		String name = (String) session.getAttribute("name");
+		String color = null;
 		
 		//연결 설정
 		String driver = "com.mysql.jdbc.Driver";
@@ -52,6 +53,7 @@
 						content = rs.getString(2);
 						title = rs.getString(3);
 						date = rs.getString(5);
+						color=rs.getString(7);
 						
 						%>
 						<table>
@@ -65,10 +67,10 @@
 							<td>최근 작성 날짜 : <%= date %></td>
 							</tr>
 							<tr>
-								<td>제목 : </td><td><div style="width:200px"><%= title %></div></td>
+								<td>제목 : </td><td><div style="width: ; background-color:<%= color %>;" ><%= title %></div></td>
 							</tr>
 							<tr>
-								<td>내용 : </td><td><div style="height:200px;width:300px"><%= content %></div></td>
+								<td>내용 : </td><td><div style="height:200px;width:300px ; background-color:<%= color %>"><%= content %></div></td>
 							</tr>
 						</table>
 						<%

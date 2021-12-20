@@ -18,14 +18,26 @@
 		String id = (String) session.getAttribute("id");
 		String name = (String) session.getAttribute("name");
 		String date = null;
+		String color = request.getParameter("color");
 		
-		if(title.equals("")) {
-			out.println("<script>alert('제목이 입력되지 않았습니다.');</script>");
-			response.sendRedirect("write.html");
+
+		if(title == null  || title.equals("")) {
+			%>
+			<script>
+			alert("제목이 입력되지 않았습니다.");
+			location.href='write.html';
+			</script>
+			<%
+			return;
 		}
-		if(content.equals("")) {
-			out.println("<script>alert('내용이 입력되지 않았습니다.');</script>");
-			response.sendRedirect("write.html");
+		if(content == null || content.equals("")) {
+			%>
+			<script>
+			alert("내용이 입력되지 않았습니다.");
+			location.href='write.html';
+			</script>
+			<%
+			return;
 		}
 		
 		String driver = "com.mysql.jdbc.Driver";
@@ -59,7 +71,7 @@
 			}
 			
 			//diary db에 정보 입력하기
-			sql = "insert into diary values(?, ?, ?, ?, ?, ?)";
+			sql = "insert into diary values(?, ?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, content);
@@ -67,6 +79,7 @@
 			pstmt.setString(4, name);
 			pstmt.setString(5, date);
 			pstmt.setInt(6, num);
+			pstmt.setString(7, color);
 			
 			result = pstmt.executeUpdate();
 		} catch(Exception e) {
@@ -75,11 +88,20 @@
 		}
 		
 		if(result == -1) {	//오류 발생
-			out.println("오류 발생<br>");
+			%>
+				<script>
+				alert("오류 발생.");
+				location.href='main.jsp';
+				</script>
+			<%
 		} else {	//오류 없이 저장
-			out.println("저장되었습니다.<br>");
+			%>
+				<script>
+				alert("저장되었습니다.");
+				location.href='main.jsp';
+				</script>
+			<%
 		}
-		out.println("<a href='main.jsp'>메인으로 이동</a>");
 	%>
 </body>
 </html>
